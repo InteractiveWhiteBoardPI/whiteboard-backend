@@ -1,4 +1,4 @@
-package com.example.whiteboardbackend.controller;
+package com.example.whiteboardbackend.socket_controller;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
