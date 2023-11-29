@@ -3,6 +3,8 @@ package com.example.whiteboardbackend.service;
 import com.example.whiteboardbackend.entity.Users;
 import com.example.whiteboardbackend.exception.UserNotFoundException;
 import com.example.whiteboardbackend.repository.UserRepository;
+
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,4 +28,11 @@ public class UserServiceImp implements UserService{
         if(user.isPresent()) return user.get();
         throw new UserNotFoundException(uid);
     }
+
+    @Override
+    public List<Users> getAllUsers() {
+        return (List<Users>) userRepository.findAll();
+    }
+
+    
 }
