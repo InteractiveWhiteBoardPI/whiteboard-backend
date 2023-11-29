@@ -20,7 +20,6 @@ public class Users {
     @Column(name = "uid")
     private String uid;
 
-    @NonNull
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 

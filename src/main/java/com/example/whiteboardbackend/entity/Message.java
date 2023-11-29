@@ -1,6 +1,6 @@
 package com.example.whiteboardbackend.entity;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 
 import io.micrometer.common.lang.NonNull;

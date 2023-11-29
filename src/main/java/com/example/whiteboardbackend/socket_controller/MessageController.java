@@ -17,6 +17,7 @@ public class MessageController {
     
     @MessageMapping("/private-message")
     public Message receiveMessage(@Payload Message message){
+        System.out.println(message);
         simpMessagingTemplate.convertAndSendToUser(message.getReceiver(),"/private",message);
         return message;
     }
