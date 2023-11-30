@@ -1,8 +1,9 @@
-package com.example.whiteboardbackend.service;
+package com.example.whiteboardbackend.service.imp;
 
 import com.example.whiteboardbackend.entity.Users;
 import com.example.whiteboardbackend.exception.UserNotFoundException;
 import com.example.whiteboardbackend.repository.UserRepository;
+import com.example.whiteboardbackend.service.UserService;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

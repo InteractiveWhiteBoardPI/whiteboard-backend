@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
     @Autowired
     UserService userService;
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get/{uid}")
     public ResponseEntity<Users> getUser(@PathVariable String uid) {
         try {
@@ -27,14 +27,12 @@ public class UserController {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/save")
     public ResponseEntity<HttpStatus> saveUser(@RequestBody Users user) {
         userService.saveUser(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/all")
     public ResponseEntity<List<Users>> getUsers() {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
