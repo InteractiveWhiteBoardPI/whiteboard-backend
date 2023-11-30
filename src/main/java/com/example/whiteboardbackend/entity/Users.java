@@ -2,9 +2,13 @@ package com.example.whiteboardbackend.entity;
 
 import lombok.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 
@@ -26,6 +30,10 @@ public class Users {
     @NonNull
     @Column(name = "email", nullable = false)
     private String email;
+    
+    @JsonIgnore()
+    @OneToOne(mappedBy = "host", cascade = CascadeType.DETACH)
+    private Session session;
 
     @Override
     public String toString() {
