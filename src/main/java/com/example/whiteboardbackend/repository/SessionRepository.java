@@ -1,4 +1,4 @@
-package com.example.whiteboardbackend.SessionRepository;
+package com.example.whiteboardbackend.repository;
 
 import java.util.UUID;
 
