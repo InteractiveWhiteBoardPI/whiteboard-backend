@@ -1,6 +1,7 @@
 package com.example.whiteboardbackend.entity;
 
 
+import com.example.whiteboardbackend.entity.entitypk.DeletedMessagePK;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -17,9 +18,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DeletedMessage {
 
-    @EmbeddedId DeletedMessagePK deletedMessagePK;
-    
-  
-   
-
+    @EmbeddedId
+    DeletedMessagePK key;
 }

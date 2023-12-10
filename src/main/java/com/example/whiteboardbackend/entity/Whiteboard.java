@@ -37,7 +37,7 @@ public class Whiteboard {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_uid", referencedColumnName = "uid")
-    private Users owner;
+    private User owner;
 
     @Override
     public String toString() {

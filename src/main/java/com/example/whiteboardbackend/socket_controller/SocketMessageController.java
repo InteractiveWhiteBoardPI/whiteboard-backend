@@ -13,24 +13,16 @@ import com.example.whiteboardbackend.service.MessageService;
 
 @Controller
 @CrossOrigin(origins = "http://localhost:3000")
-public class SocketController {
-
-
+public class SocketMessageController {
     @Autowired
     SimpMessagingTemplate simpMessagingTemplate;
 
     @Autowired
     MessageService messageService;
-   
-    
+
     @MessageMapping("/private-message")
     public Message receiveMessage(@Payload Message message){
-        // messageService.saveMessage(message);
         simpMessagingTemplate.convertAndSendToUser(message.getReceiver(),"/private",message);
         return message;
     }
-
-   
-
-
 }

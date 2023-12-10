@@ -1,4 +1,4 @@
-package com.example.whiteboardbackend.entity;
+package com.example.whiteboardbackend.entity.entitypk;
 
 import java.io.Serializable;
 

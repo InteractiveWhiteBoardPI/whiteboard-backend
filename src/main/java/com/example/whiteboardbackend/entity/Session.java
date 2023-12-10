@@ -1,15 +1,10 @@
 package com.example.whiteboardbackend.entity;
 
+import java.util.List;
 import java.util.UUID;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +21,7 @@ public class Session {
     @GeneratedValue
     private UUID uid;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     @Column(name = "password", nullable = false)
@@ -34,8 +29,14 @@ public class Session {
 
     @OneToOne(optional = false, cascade = CascadeType.DETACH)
     @JoinColumn(name = "host_id", nullable = false)
-    private Users host;
+    private User host;
 
-    
-   
+    @OneToMany(mappedBy = "joinedSession",cascade = CascadeType.DETACH)
+    private List<User> members;
+
+
+    public void addMember(User user){
+        this.members.add(user);
+    }
+
 }
