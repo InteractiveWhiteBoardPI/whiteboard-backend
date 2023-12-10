@@ -7,6 +7,8 @@ import com.example.whiteboardbackend.SessionRepository.SessionRepository;
 import com.example.whiteboardbackend.entity.Session;
 import com.example.whiteboardbackend.service.SessionService;
 
+import java.util.UUID;
+
 
 @Service
 public class SessionServiceImp implements SessionService{
@@ -17,6 +19,11 @@ public class SessionServiceImp implements SessionService{
     @Override
     public Session saveSession(Session session) {
         return sessionRepository.save(session);
+    }
+
+    @Override
+    public Session getSessionById(UUID sessionId) {
+        return sessionRepository.findById(sessionId).orElse(null);
     }
     
 }
