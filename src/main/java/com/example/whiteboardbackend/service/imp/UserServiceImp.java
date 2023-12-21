@@ -7,6 +7,7 @@ import com.example.whiteboardbackend.service.UserService;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -35,5 +36,11 @@ public class UserServiceImp implements UserService{
         return (List<Users>) userRepository.findAll();
     }
 
+    @Override
+    public Users getUserByUsername(String userName) {
+       return  this.userRepository.getUserByUsername(userName);
+    }
+
+    
     
 }

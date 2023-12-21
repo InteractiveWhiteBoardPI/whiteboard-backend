@@ -36,6 +36,4 @@ public class Session {
     @JoinColumn(name = "host_id", nullable = false)
     private Users host;
 
-    
-   
 }
