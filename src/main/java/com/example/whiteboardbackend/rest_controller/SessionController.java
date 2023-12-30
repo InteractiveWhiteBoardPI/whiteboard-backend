@@ -20,8 +20,6 @@ public class SessionController {
     @PostMapping("/createSession")
     public ResponseEntity<Session> createSession(@RequestBody Session session) {
         Session savedSession = sessionService.saveSession(session);
-        String sessionUrl = "http://localhost:3000/session/" + savedSession.getUid();
-        System.out.println(sessionUrl);
         return new ResponseEntity<>(sessionService.saveSession(session), HttpStatus.CREATED);
     }
 
@@ -35,5 +33,6 @@ public class SessionController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 
 }

@@ -30,11 +30,13 @@ public class UserController {
     @PostMapping("/save")
     public ResponseEntity<HttpStatus> saveUser(@RequestBody Users user) {
         userService.saveUser(user);
+        System.out.println(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<Users>> getUsers() {
+        System.out.println(userService.getAllUsers());
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 }
