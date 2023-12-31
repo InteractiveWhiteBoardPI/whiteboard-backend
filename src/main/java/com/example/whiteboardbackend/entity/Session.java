@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,6 +35,9 @@ public class Session {
     @OneToMany(mappedBy = "joinedSession",cascade = CascadeType.DETACH)
     private List<User> members;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "session", cascade = CascadeType.REMOVE)
+    private List<LineData> whiteboardDatas;
 
     public void addMember(User user){
         this.members.add(user);

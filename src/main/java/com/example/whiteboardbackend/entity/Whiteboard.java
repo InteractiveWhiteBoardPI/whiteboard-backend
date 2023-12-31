@@ -25,8 +25,8 @@ public class Whiteboard {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "data", nullable = false, columnDefinition = "TEXT")
-    private String data;
+    @Column(name = "data", columnDefinition = "BLOB")
+    private byte[] data;
 
     @Column(name= "name", nullable = false)
     private String name;

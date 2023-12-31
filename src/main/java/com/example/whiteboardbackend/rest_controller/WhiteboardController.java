@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.whiteboardbackend.entity.LineData;
 import com.example.whiteboardbackend.entity.Whiteboard;
 import com.example.whiteboardbackend.exception.WhitebordNotFoundException;
 import com.example.whiteboardbackend.service.WhiteboardService;
+
 
 @RestController
 @RequestMapping("/whiteboard")
@@ -45,6 +47,10 @@ public class WhiteboardController {
     public ResponseEntity<Whiteboard> save(@RequestBody Whiteboard whiteboard) {
         return new ResponseEntity<>(whiteboardService.saveWhiteboard(whiteboard),HttpStatus.OK);
     }
-    
-    
+
+    @GetMapping("/session/{session_uid}")
+    public ResponseEntity<List<LineData>> getSessionData(@PathVariable UUID session_uid) {
+        return new ResponseEntity<>(whiteboardService.getSessionWhiteboardData(session_uid),HttpStatus.OK);
+    }
+
 }
