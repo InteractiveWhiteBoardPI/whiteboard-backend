@@ -1,6 +1,6 @@
 package com.example.whiteboardbackend.service.imp;
 
-import com.example.whiteboardbackend.entity.Users;
+import com.example.whiteboardbackend.entity.User;
 import com.example.whiteboardbackend.exception.UserNotFoundException;
 import com.example.whiteboardbackend.repository.UserRepository;
 import com.example.whiteboardbackend.service.UserService;
@@ -19,20 +19,28 @@ public class UserServiceImp implements UserService{
 
 
     @Override
-    public Users saveUser(Users user) {
+    public User saveUser(User user) {
         return userRepository.save(user);
     }
 
     @Override
-    public Users getUSer(String uid) {
-        Optional<Users> user = userRepository.findById(uid);
+    public User getUSer(String uid) {
+        Optional<User> user = userRepository.findById(uid);
         if(user.isPresent()) return user.get();
         throw new UserNotFoundException(uid);
     }
 
     @Override
-    public List<Users> getAllUsers() {
-        return (List<Users>) userRepository.findAll();
+    public List<User> getAllUsers() {
+        return (List<User>) userRepository.findAll();
+    }
+
+    @Override
+    public User updateUser(String uid,byte[] byteArray,String username) {
+        User user = userRepository.getById(uid);
+        user.setUsername(username);
+        user.setImageByte(byteArray);
+        return userRepository.save(user);
     }
 
     

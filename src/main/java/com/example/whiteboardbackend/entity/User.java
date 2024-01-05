@@ -1,15 +1,12 @@
 package com.example.whiteboardbackend.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Arrays;
+import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -18,7 +15,7 @@ import jakarta.persistence.Table;
 @Setter
 @RequiredArgsConstructor
 @NoArgsConstructor
-public class Users {
+public class User {
     
     @Id
     @Column(name = "uid")
@@ -30,17 +27,30 @@ public class Users {
     @NonNull
     @Column(name = "email", nullable = false)
     private String email;
+
+    @Column(name = "image",columnDefinition = "BLOB")
+    private byte[] imageByte;
     
     @JsonIgnore()
     @OneToOne(mappedBy = "host", cascade = CascadeType.DETACH)
     private Session session;
 
+    @JsonIgnore()
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.REMOVE)
+    private List<Whiteboard> whiteboards ;
+
+    @JsonIgnore()
+    @ManyToOne()
+    @JoinColumn(name = "joined_session")
+    private Session joinedSession;
+
     @Override
     public String toString() {
-        return "Users{" +
+        return "User{" +
                 "uid='" + uid + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
+                ", imageByte=" + Arrays.toString(imageByte) +
                 '}';
     }
 }
