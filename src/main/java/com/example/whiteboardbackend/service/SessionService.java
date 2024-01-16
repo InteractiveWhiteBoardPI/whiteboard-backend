@@ -14,4 +14,9 @@ public interface SessionService {
     public void addMember(User member, UUID uuid);
 
     public List<User> getMembers(UUID sessionId);
+
+    public boolean isSessionExist(UUID sessionId);
+    public String getSessionName(UUID sessionId);
+
+    
 }

@@ -1,26 +1,28 @@
 package com.example.whiteboardbackend.entity;
 
-
 import java.time.LocalDateTime;
 
-import io.micrometer.common.lang.NonNull;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "message")
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "message_type", discriminatorType = DiscriminatorType.STRING)
 public class Message {
 
     @Id
@@ -28,36 +30,15 @@ public class Message {
     @Column(name = "id")
     private Long id;
 
-    @NonNull
-    @Column(name = "messageBody", nullable = false)
-    private String messageBody;
 
     @Column(name = "sender")
     private String sender;
 
+
     @Column(name = "receiver")
     private String receiver;
 
+
     @Column(name = "date")
     private LocalDateTime date;
-
-
-
-
-   
-    
-
-
-
-
-    @Override
-    public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", messageBody='" + getMessageBody() + "'" +
-            ", sender='" + getSender() + "'" +
-            ", receiver='" + getReceiver() + "'" +
-            "}";
-    }
-    
 }

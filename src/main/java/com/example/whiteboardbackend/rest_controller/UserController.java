@@ -5,6 +5,7 @@ import com.example.whiteboardbackend.exception.UserNotFoundException;
 import com.example.whiteboardbackend.service.UserService;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,5 +37,11 @@ public class UserController {
     @GetMapping("/all")
     public ResponseEntity<List<User>> getUsers() {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+    }
+
+    @PostMapping("/{userId}/leave/{sessionId}")
+    public ResponseEntity<HttpStatus> postMethodName(@PathVariable String userId, @PathVariable UUID sessionId) {
+        userService.removeMemberFromSession(userId, sessionId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

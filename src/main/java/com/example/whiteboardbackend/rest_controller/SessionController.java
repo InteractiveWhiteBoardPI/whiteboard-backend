@@ -11,6 +11,7 @@ import com.example.whiteboardbackend.service.SessionService;
 import java.util.List;
 import java.util.UUID;
 
+
 @RestController
 @RequestMapping("/session")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -46,5 +47,20 @@ public class SessionController {
     public ResponseEntity<List<User>> getMembers(@PathVariable UUID sessionId) {
         return new ResponseEntity<>(sessionService.getMembers(sessionId),HttpStatus.OK);
     }
+
+    @GetMapping("/is-session-exist/{sessionId}")
+    public ResponseEntity<Boolean> isSessionExist(@PathVariable UUID sessionId) {
+        return new ResponseEntity<>(sessionService.isSessionExist(sessionId),HttpStatus.OK);
+    }
+
+    @GetMapping("/name/{sessionId}")
+    public ResponseEntity<String> getSessionName(@PathVariable UUID sessionId) {
+        return new ResponseEntity<>(sessionService.getSessionName(sessionId),HttpStatus.OK);
+    }
+
+ 
+    
+
+
 
 }

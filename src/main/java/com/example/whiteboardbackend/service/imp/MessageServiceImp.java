@@ -2,13 +2,13 @@ package com.example.whiteboardbackend.service.imp;
 
 import java.util.List;
 
-import com.example.whiteboardbackend.entity.DeletedMessage;
-import com.example.whiteboardbackend.entity.entitypk.DeletedMessagePK;
-import com.example.whiteboardbackend.repository.DeletedMessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.whiteboardbackend.entity.DeletedMessage;
 import com.example.whiteboardbackend.entity.Message;
+import com.example.whiteboardbackend.entity.entitypk.DeletedMessagePK;
+import com.example.whiteboardbackend.repository.DeletedMessageRepository;
 import com.example.whiteboardbackend.repository.MessageRepository;
 import com.example.whiteboardbackend.service.MessageService;
 
@@ -23,10 +23,13 @@ public class MessageServiceImp implements MessageService {
     @Autowired
     DeletedMessageRepository deletedMessageRepository;
 
+
     @Override
     public Message saveMessage(Message message) {
         return messageRepository.save(message);
     }
+
+   
 
     @Override
     public List<Message> getUserMessages(String userUid) {
@@ -54,4 +57,18 @@ public class MessageServiceImp implements MessageService {
             );
         });
     }
+
+
+
+    @Override
+    public List<Message> getSessionMessages(String sessionUid) {
+        return messageRepository.findByReceiver(sessionUid);
+    }
+
+
+
+    
+
+ 
+
 }
