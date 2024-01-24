@@ -1,13 +1,12 @@
 package com.example.whiteboardbackend.service.imp;
 
-import com.example.whiteboardbackend.entity.Users;
+import com.example.whiteboardbackend.entity.User;
 import com.example.whiteboardbackend.exception.UserNotFoundException;
 import com.example.whiteboardbackend.repository.UserRepository;
 import com.example.whiteboardbackend.service.UserService;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -20,27 +19,19 @@ public class UserServiceImp implements UserService{
 
 
     @Override
-    public Users saveUser(Users user) {
+    public User saveUser(User user) {
         return userRepository.save(user);
     }
 
     @Override
-    public Users getUSer(String uid) {
-        Optional<Users> user = userRepository.findById(uid);
+    public User getUSer(String uid) {
+        Optional<User> user = userRepository.findById(uid);
         if(user.isPresent()) return user.get();
         throw new UserNotFoundException(uid);
     }
 
     @Override
-    public List<Users> getAllUsers() {
-        return (List<Users>) userRepository.findAll();
-    }
-
-    @Override
-    public Users getUserByUsername(String userName) {
-       return  this.userRepository.getUserByUsername(userName);
-    }
-
-    
-    
+    public List<User> getAllUsers() {
+        return (List<User>) userRepository.findAll();
+    }    
 }

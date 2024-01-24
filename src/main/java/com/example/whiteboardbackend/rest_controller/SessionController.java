@@ -1,23 +1,15 @@
 package com.example.whiteboardbackend.rest_controller;
 
-import java.security.Principal;
-
+import com.example.whiteboardbackend.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.example.whiteboardbackend.entity.Session;
-
 import com.example.whiteboardbackend.service.SessionService;
-import com.example.whiteboardbackend.service.UserService;
-import com.example.whiteboardbackend.entity.Users;
+
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/session")
@@ -26,20 +18,33 @@ public class SessionController {
 
     @Autowired
     private SessionService sessionService;
-    @Autowired
-    private UserService userService;
 
     @PostMapping("/createSession")
-    public ResponseEntity<Session> createSession(@PathVariable Session session) {
+    public ResponseEntity<Session> createSession(@RequestBody Session session) {
         return new ResponseEntity<>(sessionService.saveSession(session), HttpStatus.CREATED);
 
     }
-   @PostMapping("/app/joinSession/{sessionId}")
-    public ResponseEntity<String> joinSession(@PathVariable String sessionId, @RequestParam String name) {
- 
-    Users user = this.userService.getUserByUsername(name);
-    sessionService.joinSession(sessionId, user);
-    System.out.println("joined");
-    return ResponseEntity.ok("Joined session successfully");
-}
+
+    @GetMapping("/get/{sessionName}/{sessionPassword}")
+    public ResponseEntity<Session> getSession(
+            @PathVariable String sessionName,
+            @PathVariable String sessionPassword
+    ) {
+        return new ResponseEntity<>(sessionService.getSession(sessionName, sessionPassword), HttpStatus.OK);
+    }
+
+    @PostMapping("/join/{sessionId}")
+    public ResponseEntity<HttpStatus> addMember(
+            @RequestBody User member,
+            @PathVariable UUID sessionId
+    ) {
+        sessionService.addMember(member, sessionId);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping("/get-members/{sessionId}")
+    public ResponseEntity<List<User>> getMembers(@PathVariable UUID sessionId) {
+        return new ResponseEntity<>(sessionService.getMembers(sessionId),HttpStatus.OK);
+    }
+
 }

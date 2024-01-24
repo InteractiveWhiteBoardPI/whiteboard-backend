@@ -2,13 +2,11 @@ package com.example.whiteboardbackend.service;
 
 import java.util.List;
 
+import com.example.whiteboardbackend.entity.User;
 
-
-import com.example.whiteboardbackend.entity.Users;
 
 public interface UserService {
-    public Users saveUser(Users user);
-    public Users getUSer(String uid);
-    public List<Users> getAllUsers();
-    public Users getUserByUsername(String userName);
+    public User saveUser(User user);
+    public User getUSer(String uid);
+    public List<User> getAllUsers();
 }

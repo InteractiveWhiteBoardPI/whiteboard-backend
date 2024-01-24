@@ -5,19 +5,23 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 import com.example.whiteboardbackend.entity.Message;
+import com.example.whiteboardbackend.service.MessageService;
 
 @Controller
-public class MessageController {
-
-
+@CrossOrigin(origins = "http://localhost:3000")
+public class SocketMessageController {
     @Autowired
     SimpMessagingTemplate simpMessagingTemplate;
-    
+
+    @Autowired
+    MessageService messageService;
+
     @MessageMapping("/private-message")
     public Message receiveMessage(@Payload Message message){
-        System.out.println(message);
         simpMessagingTemplate.convertAndSendToUser(message.getReceiver(),"/private",message);
         return message;
     }
