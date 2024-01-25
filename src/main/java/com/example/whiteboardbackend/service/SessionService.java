@@ -10,6 +10,7 @@ public interface SessionService {
     Session saveSession(Session session);
 
     Session getSession(String name, String password);
+    Session getSession(UUID sessionId);
 
     void addMember(User member, UUID uuid);
 

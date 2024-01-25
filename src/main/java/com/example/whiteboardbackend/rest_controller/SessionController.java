@@ -26,6 +26,11 @@ public class SessionController {
 
     }
 
+    @GetMapping("/get/{sessionId}")
+    public ResponseEntity<Session> getSession(@PathVariable UUID sessionId) {
+        return new ResponseEntity<>(sessionService.getSession(sessionId), HttpStatus.OK);
+    }
+
     @GetMapping("/get/{sessionName}/{sessionPassword}")
     public ResponseEntity<Session> getSession(
             @PathVariable String sessionName,
