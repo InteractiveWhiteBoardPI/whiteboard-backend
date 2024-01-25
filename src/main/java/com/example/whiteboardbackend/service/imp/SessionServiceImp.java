@@ -50,7 +50,15 @@ public class SessionServiceImp implements SessionService{
                 .orElse(null);
     }
 
-    @Override  
+    @Override
+    public Session getSession(UUID sessionId) {
+        return sessionRepository
+                .findById(sessionId)
+                .orElse(null);
+    }
+
+
+    @Override
     public boolean isSessionExist(UUID sessionId) {
         return sessionRepository.existsById(sessionId);
     }
@@ -63,7 +71,4 @@ public class SessionServiceImp implements SessionService{
                 .orElse(null);
     }
 
-   
-
-    
 }

@@ -7,7 +7,8 @@ import com.example.whiteboardbackend.entity.Message;
 
 
 public interface MessageService {
-    
+
+    public Message saveMessage(Message message);
 
     public List<Message> getUserMessages(String userUid);
 
@@ -15,8 +16,7 @@ public interface MessageService {
 
     public void deleteAllMessages(String userId, String chosenUserId);
 
-    public Message saveMessage(Message message);
 
     public List<Message> getSessionMessages(String receiver);
-    
+
 }

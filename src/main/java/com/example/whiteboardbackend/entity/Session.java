@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -41,6 +42,9 @@ public class Session {
     @OneToMany(mappedBy = "joinedSession",cascade = CascadeType.DETACH)
     private List<User> members;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "session", cascade = CascadeType.REMOVE)
+    private List<LineData> whiteboardDatas;
 
     public void addMember(User user){
         this.members.add(user);

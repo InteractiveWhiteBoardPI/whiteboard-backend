@@ -9,7 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface MessageRepository extends JpaRepository<Message,Long> {
+
     List<Message> findAllBySenderOrReceiver(String sender, String receiver);
+    
 
     List<Message> findByReceiver(String receiver);
 

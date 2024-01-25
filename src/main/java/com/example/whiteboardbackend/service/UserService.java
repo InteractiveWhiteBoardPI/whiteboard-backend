@@ -11,4 +11,5 @@ public interface UserService {
     public User getUSer(String uid);
     public List<User> getAllUsers();
     public void removeMemberFromSession(String userId, UUID sessionId);
+
 }

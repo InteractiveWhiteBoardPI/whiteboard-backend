@@ -7,16 +7,17 @@ import java.util.List;
 import java.util.UUID;
 
 public interface SessionService {
-    public Session saveSession(Session session);
+    Session saveSession(Session session);
 
-    public Session getSession(String name, String password);
+    Session getSession(String name, String password);
+    Session getSession(UUID sessionId);
 
-    public void addMember(User member, UUID uuid);
+    void addMember(User member, UUID uuid);
 
-    public List<User> getMembers(UUID sessionId);
+    List<User> getMembers(UUID sessionId);
 
     public boolean isSessionExist(UUID sessionId);
     public String getSessionName(UUID sessionId);
 
-    
+
 }
