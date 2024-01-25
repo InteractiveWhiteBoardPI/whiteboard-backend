@@ -34,6 +34,8 @@ public class Users {
     @JsonIgnore()
     @OneToOne(mappedBy = "host", cascade = CascadeType.DETACH)
     private Session session;
+    @Column(columnDefinition = "blob")
+    private byte[] photo;
 
     @Override
     public String toString() {
@@ -41,6 +43,8 @@ public class Users {
                 "uid='" + uid + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
+                ", session=" + session +
+                ", photo=" + photo +
                 '}';
     }
 }
