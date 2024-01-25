@@ -13,6 +13,11 @@ public interface MessageRepository extends JpaRepository<Message,Long> {
     List<Message> findAllBySenderOrReceiver(String sender, String receiver);
     
 
+    List<Message> findByReceiver(String receiver);
+
     @Query("SELECT m FROM Message m WHERE (m.sender = :userUid AND m.receiver = :chosenUserUid) OR (m.sender = :chosenUserUid AND m.receiver = :userUid)")
     List<Message> findConversation(@Param("userUid") String userUid, @Param("chosenUserUid") String chosenUserUid);
+
+
+  
 }

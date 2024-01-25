@@ -1,12 +1,15 @@
 package com.example.whiteboardbackend.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.example.whiteboardbackend.entity.User;
 
 
 public interface UserService {
-    User saveUser(User user);
-    User getUSer(String uid);
-    List<User> getAllUsers();
+    public User saveUser(User user);
+    public User getUSer(String uid);
+    public List<User> getAllUsers();
+    public void removeMemberFromSession(String userId, UUID sessionId);
+
 }

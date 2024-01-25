@@ -56,4 +56,19 @@ public class SessionServiceImp implements SessionService{
                 .findById(sessionId)
                 .orElse(null);
     }
+
+
+    @Override
+    public boolean isSessionExist(UUID sessionId) {
+        return sessionRepository.existsById(sessionId);
+    }
+
+    @Override
+    public String getSessionName(UUID sessionId) {
+        return sessionRepository
+                .findById(sessionId)
+                .map(Session::getName)
+                .orElse(null);
+    }
+
 }

@@ -25,4 +25,8 @@ public class CallController {
         media.setUserId(from);
         messagingTemplate.convertAndSendToUser(to,"/session/toggle-media", media);
     }
+    @MessageMapping("/session/user-leave/{sessionId}")
+    public void userLeaved(@Payload String userId, @DestinationVariable String sessionId ) {
+        messagingTemplate.convertAndSendToUser(sessionId,"/session/user-left", userId);
+    }
 }

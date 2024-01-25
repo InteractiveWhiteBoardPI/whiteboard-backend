@@ -7,6 +7,8 @@ import com.example.whiteboardbackend.service.UserService;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +43,7 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    
+
 
     @PostMapping("/save")
     public ResponseEntity<HttpStatus> saveUser(@RequestBody User user) {
@@ -52,5 +54,11 @@ public class UserController {
     @GetMapping("/all")
     public ResponseEntity<List<User>> getUsers() {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
+    }
+
+    @PostMapping("/{userId}/leave/{sessionId}")
+    public ResponseEntity<HttpStatus> postMethodName(@PathVariable String userId, @PathVariable UUID sessionId) {
+        userService.removeMemberFromSession(userId, sessionId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

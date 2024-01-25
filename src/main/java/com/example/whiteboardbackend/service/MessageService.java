@@ -1,18 +1,22 @@
 package com.example.whiteboardbackend.service;
 
+import java.util.List;
+
 import com.example.whiteboardbackend.entity.DeletedMessage;
 import com.example.whiteboardbackend.entity.Message;
 
-import java.util.List;
 
 public interface MessageService {
-    
-    Message saveMessage(Message message);
 
-    List<Message> getUserMessages(String userUid);
+    public Message saveMessage(Message message);
 
-    void deleteMsg(DeletedMessage message);
+    public List<Message> getUserMessages(String userUid);
 
-    void deleteAllMessages(String UserId, String ChosenUserId);
+    public void deleteMsg(DeletedMessage message);
+
+    public void deleteAllMessages(String userId, String chosenUserId);
+
+
+    public List<Message> getSessionMessages(String receiver);
 
 }
