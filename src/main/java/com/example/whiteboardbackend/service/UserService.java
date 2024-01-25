@@ -6,7 +6,7 @@ import com.example.whiteboardbackend.entity.User;
 
 
 public interface UserService {
-    public User saveUser(User user);
-    public User getUSer(String uid);
-    public List<User> getAllUsers();
+    User saveUser(User user);
+    User getUSer(String uid);
+    List<User> getAllUsers();
 }

@@ -1,6 +1,7 @@
 package com.example.whiteboardbackend.rest_controller;
 
 import com.example.whiteboardbackend.entity.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,11 @@ public class SessionController {
     public ResponseEntity<Session> createSession(@RequestBody Session session) {
         return new ResponseEntity<>(sessionService.saveSession(session), HttpStatus.CREATED);
 
+    }
+
+    @GetMapping("/get/{sessionId}")
+    public ResponseEntity<Session> getSession(@PathVariable UUID sessionId) {
+        return new ResponseEntity<>(sessionService.getSession(sessionId), HttpStatus.OK);
     }
 
     @GetMapping("/get/{sessionName}/{sessionPassword}")

@@ -7,12 +7,12 @@ import java.util.List;
 
 public interface MessageService {
     
-    public Message saveMessage(Message message);
+    Message saveMessage(Message message);
 
-    public List<Message> getUserMessages(String userUid);
+    List<Message> getUserMessages(String userUid);
 
-    public void deleteMsg(DeletedMessage message);
+    void deleteMsg(DeletedMessage message);
 
-    public void deleteAllMessages(String UserId, String ChosenUserId);
+    void deleteAllMessages(String UserId, String ChosenUserId);
 
 }

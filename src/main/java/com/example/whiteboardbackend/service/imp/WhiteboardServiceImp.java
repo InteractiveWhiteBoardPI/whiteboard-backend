@@ -8,8 +8,10 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.whiteboardbackend.entity.LineData;
 import com.example.whiteboardbackend.entity.Whiteboard;
 import com.example.whiteboardbackend.exception.WhitebordNotFoundException;
+import com.example.whiteboardbackend.repository.LineDataRepository;
 import com.example.whiteboardbackend.repository.WhiteboardRepository;
 import com.example.whiteboardbackend.service.WhiteboardService;
 
@@ -18,6 +20,10 @@ public class WhiteboardServiceImp  implements WhiteboardService{
 
     @Autowired
     WhiteboardRepository whiteboardRepository;
+
+    @Autowired
+    LineDataRepository lineDataRepository;
+
 
     @Override
     public List<Whiteboard> getWhiteboardsByUserUid(String uid) {
@@ -36,5 +42,8 @@ public class WhiteboardServiceImp  implements WhiteboardService{
         throw new WhitebordNotFoundException(id.toString());
     }
     
-    
+    @Override
+    public List<LineData> getSessionWhiteboardData(UUID session_uid) {
+        return lineDataRepository.findBySessionUid(session_uid);
+    }
 }

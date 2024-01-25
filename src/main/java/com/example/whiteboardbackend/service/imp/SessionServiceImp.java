@@ -49,4 +49,11 @@ public class SessionServiceImp implements SessionService{
                 .map(Session::getMembers)
                 .orElse(null);
     }
+
+    @Override
+    public Session getSession(UUID sessionId) {
+        return sessionRepository
+                .findById(sessionId)
+                .orElse(null);
+    }
 }
