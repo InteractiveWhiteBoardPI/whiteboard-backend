@@ -29,7 +29,7 @@ public class MessageServiceImp implements MessageService {
         return messageRepository.save(message);
     }
 
-   
+
 
     @Override
     public List<Message> getUserMessages(String userUid) {
@@ -67,8 +67,8 @@ public class MessageServiceImp implements MessageService {
 
 
 
-    
 
- 
+
+
 
 }

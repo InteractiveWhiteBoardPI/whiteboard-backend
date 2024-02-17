@@ -5,14 +5,11 @@ import com.example.whiteboardbackend.exception.UserNotFoundException;
 import com.example.whiteboardbackend.repository.UserRepository;
 import com.example.whiteboardbackend.service.UserService;
 
-import jakarta.transaction.Transactional;
-
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class UserServiceImp implements UserService{
@@ -35,13 +32,13 @@ public class UserServiceImp implements UserService{
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return (List<User>) userRepository.findAll();
     }
 
-    @Transactional
     @Override
-    public void removeMemberFromSession(String userId, UUID sessionId) {
-        userRepository.removeMemberFromSession(userId, sessionId);
+    public boolean userExist(String uid) {
+        return userRepository.existsById(uid);
     }
-    
+
+
 }

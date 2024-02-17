@@ -40,5 +40,5 @@ public class SocketWhiteboardController {
                         .toString(),
                 "/prev",
                 lineData);
-    }    
+    }
 }

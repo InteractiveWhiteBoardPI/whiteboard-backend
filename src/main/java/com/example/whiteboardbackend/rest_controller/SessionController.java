@@ -45,6 +45,7 @@ public class SessionController {
             @RequestBody User member,
             @PathVariable UUID sessionId
     ) {
+        System.out.println("heho");
         sessionService.addMember(member, sessionId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -64,8 +65,8 @@ public class SessionController {
         return new ResponseEntity<>(sessionService.getSessionName(sessionId),HttpStatus.OK);
     }
 
- 
-    
+
+
 
 
 

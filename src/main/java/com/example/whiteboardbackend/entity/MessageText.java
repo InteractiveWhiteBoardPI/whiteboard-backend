@@ -22,11 +22,11 @@ public class MessageText extends Message {
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId() + "'" +
-            ", messageBody='" + getMessageBody() + "'" +
-            ", sender='" + super.getSender() + "'" +
-            ", receiver='" + super.getReceiver() + "'" +
-            "}";
+                " id='" + getId() + "'" +
+                ", messageBody='" + getMessageBody() + "'" +
+                ", sender='" + super.getSender() + "'" +
+                ", receiver='" + super.getReceiver() + "'" +
+                "}";
     }
-    
+
 }

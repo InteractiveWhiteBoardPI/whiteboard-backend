@@ -23,11 +23,11 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 .setAllowedOrigins("http://localhost:3000");
     }
 
-   @Override
+    @Override
     public void configureWebSocketTransport(WebSocketTransportRegistration registry) {
-        registry.setMessageSizeLimit(8 * 1024 * 1024); 
-        registry.setSendBufferSizeLimit(8 * 1024 * 1024); 
-        registry.setSendTimeLimit(20000); 
+        registry.setMessageSizeLimit(8 * 1024 * 1024);
+        registry.setSendBufferSizeLimit(8 * 1024 * 1024);
+        registry.setSendTimeLimit(20000);
     }
 
 }

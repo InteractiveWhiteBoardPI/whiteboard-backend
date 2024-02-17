@@ -40,6 +40,9 @@ public class User {
     @JoinColumn(name = "joined_session")
     private Session joinedSession;
 
+    @Column(columnDefinition = "blob")
+    private byte[] imageByte;
+
     @Override
     public String toString() {
         return "Users{" +

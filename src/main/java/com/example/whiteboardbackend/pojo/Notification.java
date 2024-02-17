@@ -11,8 +11,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Call {
+public class Notification {
     private String from;
-    private String data;
+    private String url;
     private String to;
 }
