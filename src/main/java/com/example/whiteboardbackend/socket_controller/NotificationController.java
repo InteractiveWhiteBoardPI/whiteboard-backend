@@ -15,11 +15,10 @@ public class NotificationController {
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
-    @MessageMapping("/notification/notify-user/{from}/{to}")
-    public void notifyUser(@Payload Notification notification, @DestinationVariable String from, @DestinationVariable String to) {
-        System.out.println("im here");
-        messagingTemplate.convertAndSend("/user/" + to + "/queue/notifications", notification);
-        System.out.println("im here");
+    @MessageMapping("/notification/notify-user")
+    public void notifyUser(@Payload Notification notification) {
+        System.out.println("Notification: " + notification);
+        messagingTemplate.convertAndSendToUser(notification.getTo(), "/notifications", notification);
 
     }
 }

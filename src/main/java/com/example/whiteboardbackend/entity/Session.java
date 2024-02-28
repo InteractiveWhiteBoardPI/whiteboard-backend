@@ -50,4 +50,12 @@ public class Session {
         this.members.add(user);
     }
 
+    @Override
+    public String toString() {
+        return "Session{" +
+                "uid=" + uid +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

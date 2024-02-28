@@ -1,11 +1,14 @@
 package com.example.whiteboardbackend.rest_controller;
 
-import com.example.whiteboardbackend.entity.User;
+import  com.example.whiteboardbackend.entity.User;
 import com.example.whiteboardbackend.exception.UserNotFoundException;
 import com.example.whiteboardbackend.service.UserService;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +23,8 @@ public class UserController {
     @Autowired
     UserService userService;
 
+
+
     @GetMapping("/get/{uid}")
     public ResponseEntity<User> getUser(@PathVariable String uid) {
         try {
@@ -29,28 +34,44 @@ public class UserController {
         }
     }
 
-    @GetMapping("/exist/{uid}")
-    public ResponseEntity<Boolean> isExist(@PathVariable String uid) {
-        boolean exists = userService.userExist(uid);
-        System.out.println(exists);
-        return new ResponseEntity<>(exists, HttpStatus.OK);
+    @PostMapping("/save")
+    public ResponseEntity<User> saveUser(@RequestBody User user) {
+        try {
+            return new ResponseEntity<>(userService.saveUser(user),HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<HttpStatus> saveUser(@RequestBody User user) {
-        userService.saveUser(user);
-        System.out.println(user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @GetMapping("/username/{uid}")
+    public ResponseEntity<Map<String,String>> getUserName(@PathVariable String uid) {
+        try {
+            Map<String, String> map = new HashMap<>();
+            map.put("username", userService.getUSer(uid).getUsername());
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/{userId}/leave/{sessionId}")
+    public ResponseEntity<HttpStatus> postMethodName(@PathVariable String userId, @PathVariable UUID sessionId) {
+        userService.removeMemberFromSession(userId, sessionId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/update-photo/{uid}/{username}")
-    public ResponseEntity<HttpStatus> updateUserPhoto(@PathVariable String uid, @PathVariable String username, @RequestParam("image") MultipartFile image) throws IOException {
+    public ResponseEntity<User> updateUserPhoto(
+            @PathVariable String uid,
+            @PathVariable String username,
+            @RequestBody MultipartFile image) throws IOException {
         try {
             User user = userService.getUSer(uid);
             user.setUsername(username);
-            user.setImageByte(image.getBytes());
-            userService.saveUser(user); // Assuming you have a method to save the user
-            return new ResponseEntity<>(HttpStatus.OK);
+            if(image!= null) {
+                user.setImageByte(image.getBytes());
+            }
+            return new ResponseEntity<>(userService.saveUser(user),HttpStatus.OK);
         } catch (Exception e) {
             System.out.println("Error updating user photo: " + e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -58,20 +79,16 @@ public class UserController {
     }
 
     @DeleteMapping("/update-photo/{uid}/{username}")
-    public ResponseEntity<HttpStatus> deleteUserPhoto(@PathVariable String uid, @PathVariable String username) {
+    public ResponseEntity<User> deleteUserPhoto(@PathVariable String uid, @PathVariable String username) {
         User user = userService.getUSer(uid);
         user.setUsername(username);
-        user.setImageByte(new byte[0]);
-        userService.saveUser(user);
         user.setImageByte(null);
-        userService.saveUser(user);
-        System.out.println(user);
-        return new ResponseEntity<>(HttpStatus.OK);
+        User usr = userService.saveUser(user);
+        return new ResponseEntity<>(usr,HttpStatus.OK);
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<User>> getUsers() {
-        System.out.println(userService.getAllUsers());
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 }

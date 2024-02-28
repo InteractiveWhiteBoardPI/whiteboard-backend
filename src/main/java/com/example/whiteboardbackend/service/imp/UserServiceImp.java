@@ -6,10 +6,13 @@ import com.example.whiteboardbackend.repository.UserRepository;
 import com.example.whiteboardbackend.service.UserService;
 
 import java.util.List;
+
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserServiceImp implements UserService{
@@ -40,5 +43,9 @@ public class UserServiceImp implements UserService{
         return userRepository.existsById(uid);
     }
 
-
+    @Transactional
+    @Override
+    public void removeMemberFromSession(String userId, UUID sessionId) {
+        userRepository.removeMemberFromSession(userId, sessionId);
+    }
 }
