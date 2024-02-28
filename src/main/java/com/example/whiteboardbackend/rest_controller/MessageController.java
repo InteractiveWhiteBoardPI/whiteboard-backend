@@ -26,7 +26,7 @@ public class MessageController {
 
     @Autowired
     MessageService messageService;
-     
+
     @GetMapping("/all/{id}")
     public ResponseEntity<List<Message>> getAllMessages(@PathVariable String id){
         return new ResponseEntity<>(messageService.getUserMessages(id),HttpStatus.OK);
@@ -41,7 +41,7 @@ public class MessageController {
     public ResponseEntity<Message> saveMessageFile(@RequestBody MessageFile message) {
         return new ResponseEntity<>(messageService.saveMessage(message),HttpStatus.CREATED);
     }
-  
+
 
     @PostMapping("/delete")
     public ResponseEntity<HttpStatus> deleteMsg(@RequestBody DeletedMessage message){

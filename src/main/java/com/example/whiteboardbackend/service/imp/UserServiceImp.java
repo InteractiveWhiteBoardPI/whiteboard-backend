@@ -5,9 +5,9 @@ import com.example.whiteboardbackend.exception.UserNotFoundException;
 import com.example.whiteboardbackend.repository.UserRepository;
 import com.example.whiteboardbackend.service.UserService;
 
-import jakarta.transaction.Transactional;
-
 import java.util.List;
+
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +35,12 @@ public class UserServiceImp implements UserService{
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        return (List<User>) userRepository.findAll();
+    }
+
+    @Override
+    public boolean userExist(String uid) {
+        return userRepository.existsById(uid);
     }
 
     @Transactional
@@ -43,5 +48,4 @@ public class UserServiceImp implements UserService{
     public void removeMemberFromSession(String userId, UUID sessionId) {
         userRepository.removeMemberFromSession(userId, sessionId);
     }
-    
 }

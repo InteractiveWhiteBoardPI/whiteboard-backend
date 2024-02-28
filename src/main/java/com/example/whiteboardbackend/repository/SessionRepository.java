@@ -9,4 +9,3 @@ public interface SessionRepository extends JpaRepository<Session, UUID> {
 
     Session findByNameAndPassword(String name, String password);
 }
-
