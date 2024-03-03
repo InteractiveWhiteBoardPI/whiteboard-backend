@@ -7,7 +7,6 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
-import com.example.whiteboardbackend.pojo.Call;
 import com.example.whiteboardbackend.pojo.UserMedia;
 
 
@@ -29,4 +28,6 @@ public class CallController {
     public void userLeaved(@Payload String userId, @DestinationVariable String sessionId ) {
         messagingTemplate.convertAndSendToUser(sessionId,"/session/user-left", userId);
     }
+
+    
 }
