@@ -93,7 +93,6 @@ public class UserController {
             }
             return new ResponseEntity<>(userService.saveUser(user),HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println("Error updating user photo: " + e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

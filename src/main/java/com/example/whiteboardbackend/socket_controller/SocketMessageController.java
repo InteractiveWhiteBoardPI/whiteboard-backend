@@ -30,7 +30,6 @@ public class SocketMessageController {
     @MessageMapping("/private-message/file")
     public MessageFile receiveFileMessage(@Payload MessageFile fileMessage){
         simpMessagingTemplate.convertAndSendToUser(fileMessage.getReceiver(),"/private",fileMessage);
-        System.out.println("fileMessage: "+ fileMessage);
         return fileMessage;
     }
 }

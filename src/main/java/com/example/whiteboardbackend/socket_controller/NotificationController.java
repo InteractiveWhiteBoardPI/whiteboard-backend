@@ -17,7 +17,6 @@ public class NotificationController {
 
     @MessageMapping("/notification/notify-user")
     public void notifyUser(@Payload Notification notification) {
-        System.out.println("Notification: " + notification);
         messagingTemplate.convertAndSendToUser(notification.getTo(), "/notifications", notification);
 
     }

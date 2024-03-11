@@ -20,7 +20,6 @@ public class SocketWhiteboardController {
     @MessageMapping("/whiteboard/draw")
     public void handleDrawing(@Payload LineData lineData) {
         lineDataRepository.save(lineData);
-        System.out.println(lineData);
         simpMessagingTemplate.convertAndSendToUser(
                 lineData
                         .getSession()

@@ -39,7 +39,6 @@ public class SessionController {
     ) {
         try {
             Session session = sessionService.getSession(sessionName, sessionPassword);
-            System.out.println(session);
             if(session != null){
                 return new ResponseEntity<>(session, HttpStatus.OK);
             } else {
@@ -55,7 +54,6 @@ public class SessionController {
             @RequestBody User member,
             @PathVariable UUID sessionId
     ) {
-        System.out.println("heho");
         sessionService.addMember(member, sessionId);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
