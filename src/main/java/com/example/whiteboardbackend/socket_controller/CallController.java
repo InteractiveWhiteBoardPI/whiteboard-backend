@@ -1,5 +1,6 @@
 package com.example.whiteboardbackend.socket_controller;
 
+import com.example.whiteboardbackend.pojo.PeerId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -17,8 +18,8 @@ public class CallController {
     private SimpMessagingTemplate messagingTemplate;
 
     @MessageMapping("/session/user-join/{sessionId}")
-    public void userJoined(@Payload String userId, @DestinationVariable String sessionId ) {
-        messagingTemplate.convertAndSendToUser(sessionId,"/session/user-joined", userId);
+    public void userJoined(@Payload PeerId peerId, @DestinationVariable String sessionId ) {
+        messagingTemplate.convertAndSendToUser(sessionId,"/session/user-joined", peerId);
     }
     @MessageMapping("/session/toggle-media/{from}/{to}")
     public void toggleMedia(@Payload UserMedia media, @DestinationVariable String from, @DestinationVariable String to) {

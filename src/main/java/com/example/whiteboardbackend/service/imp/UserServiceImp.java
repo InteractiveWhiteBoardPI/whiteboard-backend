@@ -48,4 +48,9 @@ public class UserServiceImp implements UserService{
     public void removeMemberFromSession(String userId, UUID sessionId) {
         userRepository.removeMemberFromSession(userId, sessionId);
     }
+
+    @Override
+    public User getUserByPeerId(String peerId) {
+        return userRepository.getUserByPeerId(peerId);
+    }
 }

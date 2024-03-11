@@ -14,4 +14,6 @@ public interface UserRepository extends JpaRepository<User,String> {
     @Modifying
     @Query("UPDATE User u SET u.joinedSession = null WHERE u.uid = :userId AND u.joinedSession.uid = :sessionId")
     public void removeMemberFromSession(String userId, UUID sessionId);
+
+    public User getUserByPeerId(String peerId);
 }

@@ -43,6 +43,9 @@ public class User {
     @Column(columnDefinition = "blob")
     private byte[] imageByte;
 
+    @Column(name = "peer_id")
+    private String peerId;
+
     @Override
     public String toString() {
         return "User{" +
@@ -51,6 +54,4 @@ public class User {
                 ", email='" + email + '\'' +
                 '}';
     }
-
-
 }

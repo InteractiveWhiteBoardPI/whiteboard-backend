@@ -11,4 +11,5 @@ public interface UserService {
     public List<User> getAllUsers();
     public boolean userExist(String uid);
     public void removeMemberFromSession(String userId, UUID sessionId);
+    public User getUserByPeerId(String peerId);
 }

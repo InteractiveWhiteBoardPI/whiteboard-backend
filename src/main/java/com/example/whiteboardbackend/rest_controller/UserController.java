@@ -34,6 +34,26 @@ public class UserController {
         }
     }
 
+    @GetMapping("/peer/{peerId}")
+    public ResponseEntity<User> getUserByPeerId(@PathVariable String peerId) {
+        try {
+            return new ResponseEntity<>(userService.getUserByPeerId(peerId), HttpStatus.OK);
+        } catch (UserNotFoundException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PutMapping("/update-peer/{uid}/{peerId}")
+    public ResponseEntity<User> updateUserPeerId(@PathVariable String uid, @PathVariable String peerId) {
+        try {
+            User user = userService.getUSer(uid);
+            user.setPeerId(peerId);
+            return new ResponseEntity<>(userService.saveUser(user),HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @PostMapping("/save")
     public ResponseEntity<User> saveUser(@RequestBody User user) {
         try {

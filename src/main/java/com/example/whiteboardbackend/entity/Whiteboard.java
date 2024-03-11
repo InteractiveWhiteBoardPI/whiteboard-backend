@@ -28,6 +28,9 @@ public class Whiteboard {
     @Column(name = "data", columnDefinition = "BLOB")
     private byte[] data;
 
+    @Column(name = "display_image", columnDefinition = "TEXT")
+    private String displayImage;
+
     @Column(name= "name", nullable = false)
     private String name;
 
